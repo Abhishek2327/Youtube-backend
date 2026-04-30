@@ -1,7 +1,7 @@
 
 
 
-export {asyncHabdler}
+export {asyncHandler}
 
 
 
