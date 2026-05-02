@@ -44,12 +44,12 @@ const userschema = new Schema({
 })
 userschema.pre("save",async function (next) {
     if(!this.isModified("password")) return next();
-    this.password=bcrypt.hash(this.password,10)
+    this.password= await bcrypt.hash(this.password,10)
     next()
 })
 
 userschema.method.isPasswordCorrect = async function (password) {
-    return await bcrypt.compare(paasword,this.paasword)
+    return await bcrypt.compare(paasword,this.password)
 }
 
 userschema.method.generateaccesstoken= function(){
