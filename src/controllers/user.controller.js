@@ -26,7 +26,7 @@
        }
 
 
-       const existeduser=User.findOne({
+       const existeduser= await User.findOne({
             $or:[{email},{username}]
        })
 
