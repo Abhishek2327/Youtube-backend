@@ -52,7 +52,7 @@ userschema.method.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(paasword,this.paasword)
 }
 
-userschema.method.generteaccesstoken= function(){
+userschema.method.generateaccesstoken= function(){
    return jwt.sign(
         {
             _id: this._id,
@@ -66,7 +66,7 @@ userschema.method.generteaccesstoken= function(){
     }
     )
 }
-userschema.method.genertefrefreshtoken= function(){
+userschema.method.generatefrefreshtoken= function(){
      return jwt.sign(
         {
             _id: this._id
