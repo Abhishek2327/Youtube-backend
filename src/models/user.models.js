@@ -27,6 +27,9 @@ const userschema = new Schema({
         type:String,
         required:true
     },
+    coverimage: {
+            type: String, // cloudinary url
+        },
     watchhistory:[{
         type:Schema.Types.ObjectId,
         ref:"video"
@@ -66,7 +69,7 @@ userschema.method.generateaccesstoken= function(){
     }
     )
 }
-userschema.method.generatefrefreshtoken= function(){
+userschema.method.generaterefreshtoken= function(){
      return jwt.sign(
         {
             _id: this._id
