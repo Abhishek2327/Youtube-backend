@@ -2,7 +2,11 @@ import {Router} from "express"
 import { registeruser } from "../controllers/user.controller.js";
 const router = Router()
 import { upload } from "../middlewares/multer.middleware.js";
-
+import {
+    loginuser,
+    logoutuser
+} from "../controllers/user.controller.js";
+import { verifyJWT } from "../middlewares/auth.midlleware.js";
 router.route("/register").post(
     upload.fields([
         {

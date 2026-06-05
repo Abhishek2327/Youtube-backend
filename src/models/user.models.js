@@ -38,7 +38,7 @@ const userschema = new Schema({
         type:String,
         required:[true,'password is req']
     },
-    refreshtokens:{
+    refreshtoken:{
         type:String
     }
 },
@@ -48,14 +48,14 @@ const userschema = new Schema({
 userschema.pre("save",async function () {
     if(!this.isModified("password")) return ;
     this.password=  await bcrypt.hash(this.password,10)
-    
+    next();
 })
 
-userschema.method.isPasswordCorrect = async function (password) {
-    return await bcrypt.compare(paasword,this.password)
-}
+userschema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password)
+} 
 
-userschema.method.generateaccesstoken= function(){
+userschema.methods.generateaccesstoken= function(){
    return jwt.sign(
         {
             _id: this._id,
@@ -69,7 +69,7 @@ userschema.method.generateaccesstoken= function(){
     }
     )
 }
-userschema.method.generaterefreshtoken= function(){
+userschema.methods.generaterefreshtoken= function(){
      return jwt.sign(
         {
             _id: this._id

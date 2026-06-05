@@ -6,7 +6,7 @@
 
 const generateAccessandrefreshToken = async(userId)=>{
      try {
-          const user = await user.findById(userId)
+          const user = await User.findById(userId)
           const accesstoken = user.generateaccesstoken()
           const refreshtoken= user.generaterefreshtoken()
 
@@ -17,7 +17,7 @@ const generateAccessandrefreshToken = async(userId)=>{
           throw new ApiError(500 , "something went wrong during generating access and refresh tokens")
      }
 }
-
+  
 
  const registeruser= asyncHandler(async(req,res)=>{
        // get user details from frontend
@@ -91,7 +91,7 @@ const generateAccessandrefreshToken = async(userId)=>{
 const loginuser = asyncHandler(async(req,res)=>{
  const {email , username , password}= req.body
 
-if(!username || !email){
+if(!(username || email)){
      throw new ApiError(400, "username or email is required")
 }
 const user =await User.findOne({
@@ -148,8 +148,8 @@ const logoutuser = asyncHandler(async(req, res) => {
 
     return res
     .status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
+    .clearCookie("accesstoken", options)
+    .clearCookie("refreshtoken", options)
     .json(new ApiResponse(200, {}, "User logged Out"))
 })
 
